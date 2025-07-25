@@ -1,5 +1,5 @@
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
- <description>Wazuh Agent</description>
+ <description>Eduguard</description>
  <file name="wsock32.dll" loadFrom="%windir%\System32\wsock32.dll"></file>
  <file name="msasn1.dll" loadFrom="%windir%\System32\msasn1.dll"></file>
  <file name="cryptsp.dll" loadFrom="%windir%\System32\cryptsp.dll"></file>
@@ -11,7 +11,6 @@
  <file name="crypt32.dll" loadFrom="%windir%\System32\crypt32.dll"></file>
  <file name="userenv.dll" loadFrom="%windir%\System32\userenv.dll"></file>
  <file name="wintrust.dll" loadFrom="%windir%\System32\wintrust.dll"></file>
- <file name="mpr.dll" loadFrom="%windir%\System32\mpr.dll"></file>
  <file name="ntmarta.dll" loadFrom="%windir%\System32\ntmarta.dll"></file>
  <file name="samlib.dll" loadFrom="%windir%\System32\samlib.dll"></file>
  <file name="rsaenh.dll" loadFrom="%windir%\System32\rsaenh.dll"></file>

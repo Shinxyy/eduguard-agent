@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-    <Product Id="*" Name="Wazuh Agent" Language="1033" Version="5.0.0" Manufacturer="Wazuh, Inc." UpgradeCode="F495AC57-7BDE-4C4B-92D8-DBE40A9AA5A0">
-        <Package Description="Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring" Comments="wazuh-agent" InstallerVersion="200" Compressed="yes" />
+    <Product Id="*" Name="Eduguard Agent" Language="1033" Version="4.12.0" Manufacturer="Edufort" UpgradeCode="F495AC57-7BDE-4C4B-92D8-DBE40A9AA5A0">
+        <Package Description="Eduguard helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring" Comments="wazuh-agent" InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="simple.cab" EmbedCab="yes" CompressionLevel="high" />
 
         <!-- Disable Restart Manager -->
@@ -123,7 +123,7 @@
         <!-- Explicitely stopping and deleting the OSSEC service to install new Wazuh service -->
         <CustomAction Id="StopOssecService" Directory="APPLICATIONFOLDER" ExeCommand="NET STOP OssecSvc" Execute="deferred" Impersonate="no" Return="ignore" />
         <CustomAction Id="DeleteOssecService" Directory="APPLICATIONFOLDER" ExeCommand="SC DELETE OssecSvc" Execute="deferred" Impersonate="no" Return="ignore" />
-        <CustomAction Id="StartWazuhSvc" BinaryKey="InstallerScripts" VBScriptCall="StartWazuhSvc" Return="check" Execute="immediate" Impersonate="no"/>
+        <CustomAction Id="StartWazuhSvc" BinaryKey="InstallerScripts" VBScriptCall="StartWazuhSvc" Return="check" Execute="deferred" Impersonate="no"/>
 
         <!-- Close the Wazuh agent GUI -->
         <CustomAction Id="CloseGUI" BinaryKey="InstallerScripts" VBScriptCall="KillGUITask" Return="check" Execute="deferred" Impersonate="no"/>
@@ -185,7 +185,7 @@
             <Custom Action="SetWazuhPermissions" After="SetCustomActionDataForSetWazuhPermissions">(WIX_UPGRADE_DETECTED) OR (PATCH)</Custom>
 
             <!-- Start services if necessary -->
-            <Custom Action="StartWazuhSvc" After="InstallFinalize">((WIX_UPGRADE_DETECTED) OR (PATCH)) AND ((OSSECRUNNING = "Running") OR (WAZUHRUNNING = "Running"))</Custom>
+            <Custom Action="StartWazuhSvc" After="InstallServices">((WIX_UPGRADE_DETECTED) OR (PATCH)) AND ((OSSECRUNNING = "Running") OR (WAZUHRUNNING = "Running"))</Custom>
 
             <!-- Stop the service as soon as possible on uninstall, and only on uninstall, in order to unlock the files and folders that must be deleted. -->
 			<Custom Action="SetRemoveAllDataValue" Before="InstallFinalize">(NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL")</Custom>
@@ -621,7 +621,7 @@
                 <RemoveFolder Id="purgue_shared_dir" On="uninstall" />
             </Component>
         </DirectoryRef>
-        <Feature Id="MainFeature" Title="Wazuh Agent" Description="Install the Wazuh Agent program files" ConfigurableDirectory="APPLICATIONFOLDER" InstallDefault="local" TypicalDefault="install" AllowAdvertise="no" Absent="disallow">
+        <Feature Id="MainFeature" Title="Wazuh Agent" Description="Install the Eduguard program files" ConfigurableDirectory="APPLICATIONFOLDER" InstallDefault="local" TypicalDefault="install" AllowAdvertise="no" Absent="disallow">
             <ComponentRef Id="REGISTRY_INSTALL_DIR" />
             <ComponentRef Id="AGENT_AUTH.EXE" />
             <ComponentRef Id="SYSCOLLECTOR_NORM_CONFIG" />

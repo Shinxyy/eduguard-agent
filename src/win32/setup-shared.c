@@ -71,7 +71,7 @@ int direxist(char *dir)
     DIR *dp;
 
     /* Open dir */
-    dp = wopendir(dir);
+    dp = opendir(dir);
     if (dp == NULL) {
         return (0);
     }

@@ -20,9 +20,9 @@
 ; general
 !define MUI_ICON install.ico
 !define MUI_UNICON uninstall.ico
-!define VERSION "5.0.0"
-!define REVISION "alpha0"
-!define NAME "Wazuh"
+!define VERSION "4.12.0"
+!define REVISION "rc1"
+!define NAME "Eduguard"
 !define SERVICE "WazuhSvc"
 
 ; output file
@@ -33,17 +33,17 @@
 Var is_upgrade
 
 Name "${NAME} Windows Agent v${VERSION}"
-BrandingText "Copyright (C) 2015, Wazuh Inc."
+BrandingText "Copyright (C), Edufort"
 OutFile "${OutFile}"
 
-VIProductVersion "5.0.0.0"
+VIProductVersion "4.12.0.0"
 VIAddVersionKey ProductName "${NAME}"
-VIAddVersionKey CompanyName "Wazuh Inc."
-VIAddVersionKey LegalCopyright "2023 - Wazuh Inc."
-VIAddVersionKey FileDescription "Wazuh Agent installer"
+VIAddVersionKey CompanyName "Edufort"
+VIAddVersionKey LegalCopyright "2025 - Edufort"
+VIAddVersionKey FileDescription "Eduguard installer"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey ProductVersion "${VERSION}"
-VIAddVersionKey InternalName "Wazuh Agent"
+VIAddVersionKey InternalName "Eduguard"
 VIAddVersionKey OriginalFilename "${OutFile}"
 
 InstallDir "$PROGRAMFILES\ossec-agent"
@@ -65,7 +65,7 @@ ShowUninstDetails show
 !define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the install of ${Name}.\r\n\r\nClick next to continue."
 !define MUI_FINISHPAGE_TITLE_3LINES
 !define MUI_FINISHPAGE_RUN "$INSTDIR\win32ui.exe"
-!define MUI_FINISHPAGE_RUN_TEXT "Run Agent manager"
+!define MUI_FINISHPAGE_RUN_TEXT "Run Eduguard manager"
 
 ; page for choosing components
 !define MUI_COMPONENTSPAGE_TEXT_TOP "Select the options you want to be executed. Click next to continue."
@@ -139,7 +139,7 @@ Function .onInit
 FunctionEnd
 
 ; main install section
-Section "Wazuh Agent (required)" MainSec
+Section "Eduguard (required)" MainSec
     ; set install type and cwd
     SectionIn RO
     SetOutPath $INSTDIR
@@ -239,10 +239,10 @@ Section "Wazuh Agent (required)" MainSec
     WriteRegStr HKLM SOFTWARE\ossec "Install_Dir" "$INSTDIR"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayName" "${NAME} Agent"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayVersion" "${VERSION}"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "Publisher" "Wazuh, Inc."
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "Publisher" "Edufort"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayIcon" '"$INSTDIR\favicon.ico"'
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "HelpLink" "https://wazuh.com"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "URLInfoAbout" "https://wazuh.com"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "HelpLink" "https://edufort.nl"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "URLInfoAbout" "https://edufort.nl"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "UninstallString" '"$INSTDIR\uninstall.exe"'
     ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
     IntFmt $0 "0x%08X" $0
@@ -334,7 +334,7 @@ Section "Wazuh Agent (required)" MainSec
 
     ; create shortcuts
     CreateDirectory "$SMPROGRAMS\OSSEC"
-    CreateShortCut "$SMPROGRAMS\OSSEC\Manage Agent.lnk" "$INSTDIR\win32ui.exe" "" "$INSTDIR\win32ui.exe" 0
+    CreateShortCut "$SMPROGRAMS\OSSEC\Manage Eduguard.lnk" "$INSTDIR\win32ui.exe" "" "$INSTDIR\win32ui.exe" 0
     CreateShortCut "$SMPROGRAMS\OSSEC\Documentation.lnk" "$INSTDIR\doc.html" "" "$INSTDIR\doc.html" 0
     CreateShortCut "$SMPROGRAMS\OSSEC\Edit Config.lnk" "$INSTDIR\ossec.conf" "" "$INSTDIR\ossec.conf" 0
     CreateShortCut "$SMPROGRAMS\OSSEC\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
